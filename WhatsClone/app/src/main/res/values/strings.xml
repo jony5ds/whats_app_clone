@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">WhatsClone</string>
+    <string name="digite_seu_email">Digite seu e-mail</string>
+    <string name="cod_regia">+55</string>
+    <string name="cod_area">21</string>
+    <string name="logar">Logar</string>
+    <string name="validar">Validar</string>
+    <string name="digite_senha">Digite sua senha</string>
+    <string name="validacao">Validação</string>
+    <string name="registro_validacao">Você recebeu um SMS para a validação do seu número, digite o código de validação abaixo</string>
+    <string name="erro_envio">Problema ao enviar o SMS, por favor tente novamente !</string>
+    <string name="title_activity_cadastro_usuario">CadastroUsuarioActivity</string>
+    <string name="digite_seu_nome">Digite seu nome</string>
+    <string name="cadastre_se">Cadastre-se</string>
+
+</resources>

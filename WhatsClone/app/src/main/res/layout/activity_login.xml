@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="login"
+            type="com.example.whatsclone.activity.login.LoginActivity"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        tools:context=".activity.login.LoginActivity">
+
+        <ImageView
+            android:layout_width="@dimen/largura_logo"
+            android:layout_height="@dimen/altura_logo"
+            android:layout_gravity="center"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/logo"
+            tools:ignore="ContentDescription" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:layout_marginBottom="36dp"
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+            <EditText
+                android:id="@+id/edt_nome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/digite_seu_email"
+                android:inputType="none"
+                android:textColor="@color/textColorPrimary"
+                android:textColorHint="@color/textColorPrimary"
+                tools:ignore="Autofill" />
+
+            <EditText
+                android:id="@+id/edt_senha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/digite_senha"
+                android:inputType="textPassword"
+                android:textColor="@color/textColorPrimary"
+                android:textColorHint="@color/textColorPrimary"
+                android:layout_marginTop="16dp"
+                tools:ignore="Autofill" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_logar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:textSize="16sp"
+            android:layout_marginRight="16dp"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/textColorPrimary"
+            android:text="@string/logar" />
+        
+        <TextView
+            android:id="@+id/btn_cadastrar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Não tem uma conta ? Cadastra-se"
+            android:textSize="18sp"
+            android:layout_marginTop="24dp"
+            android:textColor="@color/textColorPrimary"
+            android:onClick="abrirCadastro"/>
+
+    </LinearLayout>
+</layout>

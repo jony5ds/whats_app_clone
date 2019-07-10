@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="cadastro"
+            type="com.example.whatsclone.activity.cadastro.CadastroUsuarioActivity" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/colorPrimary"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".activity.cadastro.CadastroUsuarioActivity"
+        tools:showIn="@layout/activity_cadastro_usuario">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="80dp"
+            android:background="@drawable/usuario" />
+
+        <EditText
+            android:id="@+id/edt_cadastro_nome"
+            style="@style/edit_text_whats"
+            android:layout_marginTop="48dp"
+            android:inputType="none"
+            android:hint="@string/digite_seu_nome" />
+
+        <EditText
+            android:id="@+id/edt_cadastro_email"
+            style="@style/edit_text_whats"
+            android:layout_marginTop="24dp"
+            android:inputType="textEmailAddress"
+            android:hint="@string/digite_seu_email" />
+        <EditText
+            android:id="@+id/edt_cadastro_senha"
+            style="@style/edit_text_whats"
+            android:layout_marginTop="24dp"
+            android:inputType="textPassword"
+            android:hint="@string/digite_senha" />
+
+        <Button
+            android:id="@+id/btn_cadastrar"
+            android:text="@string/cadastre_se"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:textSize="16sp"
+            android:layout_marginRight="16dp"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/textColorPrimary"/>
+
+    </LinearLayout>
+</layout>
