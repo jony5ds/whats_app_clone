@@ -27,6 +27,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
            @Override
            public void onClick(View v) {
                obterDados();
+               cadastrarUsuario();
 
            }
        });
@@ -37,6 +38,10 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
        mUsuario.setNome(mBinding.edtCadastroNome.getText().toString());
        mUsuario.setEmail(mBinding.edtCadastroEmail.getText().toString());
        mUsuario.setSenha(mBinding.edtCadastroSenha.getText().toString());
+    }
+
+    private void cadastrarUsuario() {
+
     }
 
 }
