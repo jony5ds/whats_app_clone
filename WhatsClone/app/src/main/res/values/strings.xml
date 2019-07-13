@@ -13,5 +13,7 @@
     <string name="digite_seu_nome">Digite seu nome</string>
     <string name="cadastre_se">Cadastre-se</string>
     <string name="ir_para_cadastro">Não tem uma conta ? Cadastre-se</string>
+    <string name="sucesso_cadastro">Sucesso ao cadastrar ao cadastrar o usuário</string>
+    <string name="falha_cadastro">Erro ao cadastrar ao cadastrar o usuário</string>
 
 </resources>
