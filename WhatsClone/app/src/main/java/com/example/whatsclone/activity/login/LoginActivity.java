@@ -17,10 +17,12 @@ import android.widget.Toast;
 
 import com.example.whatsclone.R;
 import com.example.whatsclone.activity.cadastro.CadastroUsuarioActivity;
+import com.example.whatsclone.config.ConfiguracaoFirebase;
 import com.example.whatsclone.obj.UsuarioObj;
 import com.example.whatsclone.databinding.ActivityLoginBinding;
 import com.example.whatsclone.helper.Permissoes;
 import com.example.whatsclone.helper.Preferencias;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -33,11 +35,14 @@ public class LoginActivity extends AppCompatActivity {
             Manifest.permission.SEND_SMS,
             Manifest.permission.INTERNET
     };
+    private DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_login);
+        reference = ConfiguracaoFirebase.getFirebase();
+        reference.child("pontos").setValue("800");
 
     }
 

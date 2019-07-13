@@ -12,5 +12,6 @@
     <string name="title_activity_cadastro_usuario">CadastroUsuarioActivity</string>
     <string name="digite_seu_nome">Digite seu nome</string>
     <string name="cadastre_se">Cadastre-se</string>
+    <string name="ir_para_cadastro">Não tem uma conta ? Cadastre-se</string>
 
 </resources>

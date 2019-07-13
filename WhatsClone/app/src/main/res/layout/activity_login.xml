@@ -73,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Não tem uma conta ? Cadastra-se"
+            android:text="@string/ir_para_cadastro"
             android:textSize="18sp"
             android:layout_marginTop="24dp"
             android:textColor="@color/textColorPrimary"
