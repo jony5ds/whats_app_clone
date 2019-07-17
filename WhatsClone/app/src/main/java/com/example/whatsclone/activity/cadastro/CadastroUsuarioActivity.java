@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class CadastroUsuarioActivity extends AppCompatActivity {
 
@@ -55,8 +56,12 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         ).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful())
-                    Toast.makeText(getApplicationContext(),getString(R.string.sucesso_cadastro),Toast.LENGTH_SHORT).show();
+                if (task.isSuccessful()) {
+                    Toast.makeText(getApplicationContext(), getString(R.string.sucesso_cadastro), Toast.LENGTH_SHORT).show();
+                    FirebaseUser usuarioFirebase =  task.getResult().getUser();
+                    mUsuario.setId(usuarioFirebase.getUid());
+                    mUsuario.salvar();
+                }
                 else
                     Toast.makeText(getApplicationContext(),getString(R.string.erro_envio),Toast.LENGTH_SHORT).show();
             }

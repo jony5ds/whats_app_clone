@@ -35,14 +35,13 @@ public class LoginActivity extends AppCompatActivity {
             Manifest.permission.SEND_SMS,
             Manifest.permission.INTERNET
     };
-    private DatabaseReference reference;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_login);
-        reference = ConfiguracaoFirebase.getFirebase();
-        reference.child("pontos").setValue("800");
+
 
     }
 

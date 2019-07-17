@@ -1,5 +1,9 @@
 package com.example.whatsclone.obj;
 
+import com.example.whatsclone.config.ConfiguracaoFirebase;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Exclude;
+
 public class UsuarioObj {
 
     private String id;
@@ -7,6 +11,10 @@ public class UsuarioObj {
     private String email;
     private String senha;
 
+    public UsuarioObj(){
+
+    }
+    @Exclude
     public String getId() {
         return id;
     }
@@ -30,12 +38,18 @@ public class UsuarioObj {
     public void setEmail(String email) {
         this.email = email;
     }
-
+    @Exclude
     public String getSenha() {
         return senha;
     }
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public void salvar()
+    {
+        DatabaseReference reference = ConfiguracaoFirebase.getFirebase();
+        reference.child("Usuarios").child(getId()).setValue(this);
     }
 }
