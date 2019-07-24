@@ -66,3 +66,6 @@ WhatsClone/app/.idea/libraries/Gradle__com_google_firebase_firebase_auth_16_1_0_
 WhatsClone/app/.idea/workspace.xml
 *.xml
 *.ser
+*.xml
+*.xml
+WhatsClone/app/.idea/workspace.xml

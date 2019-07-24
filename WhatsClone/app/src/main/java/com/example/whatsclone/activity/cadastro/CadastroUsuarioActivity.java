@@ -61,6 +61,10 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                     FirebaseUser usuarioFirebase =  task.getResult().getUser();
                     mUsuario.setId(usuarioFirebase.getUid());
                     mUsuario.salvar();
+
+                    autentica.signOut();
+                    finish();
+
                 }
                 else
                     Toast.makeText(getApplicationContext(),getString(R.string.erro_envio),Toast.LENGTH_SHORT).show();
