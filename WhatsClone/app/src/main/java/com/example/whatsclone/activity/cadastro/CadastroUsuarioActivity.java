@@ -67,7 +67,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
 
                 }
                 else
-                    Toast.makeText(getApplicationContext(),getString(R.string.erro_envio),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),getString(R.string.falha_cadastro),Toast.LENGTH_SHORT).show();
             }
         });
 
