@@ -54,11 +54,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void verificarUsuarioLogado() {
        if (mAuth.getCurrentUser() != null)
-       {
-
-       }
-
-
+           chamarTelaConversas();
     }
 
     private void validarLogin() {
@@ -95,6 +91,7 @@ public class LoginActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(LoginActivity.this, ConversasActivity.class);
         startActivity(intent);
+        finish();
 
     }
 }
