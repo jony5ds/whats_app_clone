@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.whatsclone.R;
 import com.example.whatsclone.activity.cadastro.CadastroUsuarioActivity;
+import com.example.whatsclone.activity.conversas.ConversasActivity;
 import com.example.whatsclone.config.ConfiguracaoFirebase;
 import com.example.whatsclone.obj.UsuarioObj;
 import com.example.whatsclone.databinding.ActivityLoginBinding;
@@ -69,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful())
                 {
+                    chamarTelaConversas();
                     Toast.makeText(LoginActivity.this,"Login efetuado com sucesso!",Toast.LENGTH_SHORT).show();
                 } else
                 {
@@ -87,5 +89,12 @@ public class LoginActivity extends AppCompatActivity {
     public void abrirCadastro(View view) {
         Intent intent = new Intent(LoginActivity.this, CadastroUsuarioActivity.class);
         startActivity(intent);
+    }
+
+    private void chamarTelaConversas()
+    {
+        Intent intent = new Intent(LoginActivity.this, ConversasActivity.class);
+        startActivity(intent);
+
     }
 }
