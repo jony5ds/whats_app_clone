@@ -52,10 +52,7 @@ public class ConversasActivity extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
-
         }
-
-
     }
 
     private void deslogarUsuario() {
