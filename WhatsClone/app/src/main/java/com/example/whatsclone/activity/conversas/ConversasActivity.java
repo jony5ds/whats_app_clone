@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.example.whatsclone.R;
@@ -20,21 +23,43 @@ public class ConversasActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this,R.layout.activity_conversas);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_conversas);
 
         mAuth = ConfiguracaoFirebase.getAutenticacao();
+        mBinding.contentToolbar.toolbarPrincipal.setTitle(getString(R.string.whats_app));
+        setSupportActionBar(mBinding.contentToolbar.toolbarPrincipal);
 
-        mBinding.btnSair.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAuth.signOut();
-                voltar();
-            }
-        });
     }
 
     private void voltar() {
         Intent intent = new Intent(ConversasActivity.this, LoginActivity.class);
         startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_toolbar_principal, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.item_sair:
+                deslogarUsuario();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+
+
+    }
+
+    private void deslogarUsuario() {
+        mAuth.signOut();
+        voltar();
     }
 }

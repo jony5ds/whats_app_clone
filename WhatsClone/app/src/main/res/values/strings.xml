@@ -15,5 +15,10 @@
     <string name="ir_para_cadastro">Não tem uma conta ? Cadastre-se</string>
     <string name="sucesso_cadastro">Sucesso ao cadastrar ao cadastrar o usuário</string>
     <string name="falha_cadastro">Erro ao cadastrar ao cadastrar o usuário</string>
+    <string name="whats_app">WhatsApp</string>
+    <string name="sair">Sair</string>
+    <string name="pesquisa">Pesquisa</string>
+    <string name="adcionar">Adicionar</string>
+    <string name="configuracao">Configuração</string>
 
 </resources>

@@ -6,7 +6,6 @@
             type="com.example.whatsclone.activity.conversas.ConversasActivity" />
     </data>
 
-
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -15,13 +14,10 @@
         android:orientation="vertical"
         tools:context=".activity.conversas.ConversasActivity">
 
-        <Button
-            android:id="@+id/btn_sair"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="sair"
-            android:layout_gravity="center"
-            android:layout_marginTop="300dp"/>
+        <include
+            android:id="@+id/content_toolbar"
+            layout="@layout/toolbar"/>
+
 
     </LinearLayout>
 </layout>
