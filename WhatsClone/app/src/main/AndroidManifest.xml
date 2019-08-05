@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/WhatsAppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.conversas.ConversasActivity"></activity>
+
+        <activity android:name=".activity.conversas.ConversasActivity"/>
         <activity
             android:name=".activity.cadastro.CadastroUsuarioActivity"
             android:label="@string/title_activity_cadastro_usuario"

@@ -1,7 +1,9 @@
 package com.example.whatsclone.activity.conversas;
 
+import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.whatsclone.R;
+import com.example.whatsclone.activity.conversas.adapter.Tab_adapter;
 import com.example.whatsclone.activity.login.LoginActivity;
 import com.example.whatsclone.config.ConfiguracaoFirebase;
 import com.example.whatsclone.databinding.ActivityConversasBinding;
@@ -24,10 +27,28 @@ public class ConversasActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_conversas);
-
         mAuth = ConfiguracaoFirebase.getAutenticacao();
+        configurarToolbarViewPager();
+
+
+    }
+
+    private void configurarToolbarViewPager() {
+
         mBinding.contentToolbar.toolbarPrincipal.setTitle(getString(R.string.whats_app));
         setSupportActionBar(mBinding.contentToolbar.toolbarPrincipal);
+
+        //Configurar Tabs
+        mBinding.tabs.setDistributeEvenly(true);
+        mBinding.tabs.setSelectedIndicatorColors(ContextCompat.getColor(this,R.color.ascent));
+
+
+        // Configurar Adapter
+        Tab_adapter tabAdapter = new Tab_adapter(getSupportFragmentManager());
+        mBinding.viewPager.setAdapter(tabAdapter);
+        mBinding.tabs.setViewPager(mBinding.viewPager);
+
+
 
     }
 
