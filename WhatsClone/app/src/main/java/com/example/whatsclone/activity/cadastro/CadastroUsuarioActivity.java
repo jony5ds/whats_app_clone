@@ -103,5 +103,4 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         finish();
 
     }
-
 }

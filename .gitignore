@@ -23,8 +23,7 @@ Thumbs.db
 
 # Android Studio
 *.iml
-.idea
-#.idea/workspace.xml 
+.idea 
 .gradle
 build/
 .navigation
@@ -34,3 +33,4 @@ output.json
 #NDK
 obj/
 .externalNativeBuild
+WhatsClone/app/.idea/workspace.xml
