@@ -1,5 +1,6 @@
 package com.example.whatsclone.activity.cadastro;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,8 +12,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.whatsclone.R;
+import com.example.whatsclone.activity.conversas.ConversasActivity;
+import com.example.whatsclone.activity.login.LoginActivity;
 import com.example.whatsclone.config.ConfiguracaoFirebase;
 import com.example.whatsclone.databinding.ActivityCadastroUsuarioBinding;
+import com.example.whatsclone.helper.Base64Custom;
 import com.example.whatsclone.obj.UsuarioObj;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -61,12 +65,10 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(getApplicationContext(), getString(R.string.sucesso_cadastro), Toast.LENGTH_SHORT).show();
-                    FirebaseUser usuarioFirebase =  task.getResult().getUser();
-                    mUsuario.setId(usuarioFirebase.getUid());
+                    String novoUsuario = Base64Custom.codificarBase64(mUsuario.getEmail());
+                    mUsuario.setId(novoUsuario);
                     mUsuario.salvar();
-
-                    autentica.signOut();
-                    finish();
+                    irParaTelaConversas();
 
                 }
                 else {
@@ -91,6 +93,14 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                 }
             }
         });
+
+    }
+
+    private void irParaTelaConversas()
+    {
+        Intent intent = new Intent(this, ConversasActivity.class);
+        startActivity(intent);
+        finish();
 
     }
 

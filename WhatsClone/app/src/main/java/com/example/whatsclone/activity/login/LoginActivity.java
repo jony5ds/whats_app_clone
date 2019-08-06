@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void verificarUsuarioLogado() {
        if (mAuth.getCurrentUser() != null)
-           chamarTelaConversas();
+           irParaTelaConversas();
     }
 
     private void validarLogin() {
@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful())
                 {
-                    chamarTelaConversas();
+                    irParaTelaConversas();
                     Toast.makeText(LoginActivity.this,"Login efetuado com sucesso!",Toast.LENGTH_SHORT).show();
                 } else
                 {
@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void chamarTelaConversas()
+    private void irParaTelaConversas()
     {
         Intent intent = new Intent(LoginActivity.this, ConversasActivity.class);
         startActivity(intent);
