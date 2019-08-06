@@ -25,8 +25,6 @@ public class LoginActivity extends AppCompatActivity {
     private UsuarioObj mUser;
     private FirebaseAuth mAuth;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,13 +46,11 @@ public class LoginActivity extends AppCompatActivity {
                 validarLogin();
             }
         });
-
-
     }
 
     private void verificarUsuarioLogado() {
-       if (mAuth.getCurrentUser() != null)
-           irParaTelaConversas();
+        if (mAuth.getCurrentUser() != null)
+            irParaTelaConversas();
     }
 
     private void validarLogin() {
@@ -64,13 +60,11 @@ public class LoginActivity extends AppCompatActivity {
                 mUser.getSenha()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful())
-                {
+                if (task.isSuccessful()) {
                     irParaTelaConversas();
-                    Toast.makeText(LoginActivity.this,"Login efetuado com sucesso!",Toast.LENGTH_SHORT).show();
-                } else
-                {
-                    Toast.makeText(LoginActivity.this,"Erro ao efetuar login!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Login efetuado com sucesso!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(LoginActivity.this, "Erro ao efetuar login!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -79,7 +73,6 @@ public class LoginActivity extends AppCompatActivity {
     private void obterUsuario() {
         mUser.setEmail(mBinding.edtEmail.getText().toString());
         mUser.setSenha(mBinding.edtSenha.getText().toString());
-
     }
 
     public void abrirCadastro(View view) {
@@ -87,11 +80,9 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void irParaTelaConversas()
-    {
+    private void irParaTelaConversas() {
         Intent intent = new Intent(LoginActivity.this, ConversasActivity.class);
         startActivity(intent);
         finish();
-
     }
 }

@@ -44,7 +44,6 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
            public void onClick(View v) {
                obterDados();
                cadastrarUsuario();
-
            }
        });
 
@@ -72,7 +71,6 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
 
                 }
                 else {
-
                     String erro_exception;
                     try {
                         throw task.getException();
@@ -88,7 +86,6 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                         erro_exception = "Erro ao efetuar o cadastro!";
                         e.printStackTrace();
                     }
-
                     Toast.makeText(getApplicationContext(), erro_exception, Toast.LENGTH_SHORT).show();
                 }
             }
