@@ -34,3 +34,4 @@ output.json
 obj/
 .externalNativeBuild
 WhatsClone/app/.idea/workspace.xml
+WhatsClone/app/.idea/caches/gradle_models.ser
