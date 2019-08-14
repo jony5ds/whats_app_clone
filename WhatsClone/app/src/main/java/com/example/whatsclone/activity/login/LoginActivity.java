@@ -12,6 +12,8 @@ import com.example.whatsclone.R;
 import com.example.whatsclone.activity.cadastro.CadastroUsuarioActivity;
 import com.example.whatsclone.activity.conversas.ConversasActivity;
 import com.example.whatsclone.config.ConfiguracaoFirebase;
+import com.example.whatsclone.helper.Base64Custom;
+import com.example.whatsclone.helper.Preferencias;
 import com.example.whatsclone.obj.UsuarioObj;
 import com.example.whatsclone.databinding.ActivityLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,7 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class LoginActivity extends AppCompatActivity {
 
     private static ActivityLoginBinding mBinding;
-    private UsuarioObj mUser;
+    private UsuarioObj mUsuario;
     private FirebaseAuth mAuth;
 
     @Override
@@ -33,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
 
         verificarUsuarioLogado();
 
-        mUser = new UsuarioObj();
+        mUsuario = new UsuarioObj();
 
         mBinding.btnLogar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,11 +58,13 @@ public class LoginActivity extends AppCompatActivity {
     private void validarLogin() {
 
         mAuth.signInWithEmailAndPassword(
-                mUser.getEmail(),
-                mUser.getSenha()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                mUsuario.getEmail(),
+                mUsuario.getSenha()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+                    //salva email do usuário ao logar
+                    salvarUsuarioLogado();
                     irParaTelaConversas();
                     Toast.makeText(LoginActivity.this, "Login efetuado com sucesso!", Toast.LENGTH_SHORT).show();
                 } else {
@@ -70,9 +74,15 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    private void salvarUsuarioLogado() {
+        Preferencias preferencias = new Preferencias(LoginActivity.this);
+        String identificadorUsuarioLogado = Base64Custom.codificarBase64(mUsuario.getEmail());
+        preferencias.salvarDados(identificadorUsuarioLogado);
+    }
+
     private void obterUsuario() {
-        mUser.setEmail(mBinding.edtEmail.getText().toString());
-        mUser.setSenha(mBinding.edtSenha.getText().toString());
+        mUsuario.setEmail(mBinding.edtEmail.getText().toString());
+        mUsuario.setSenha(mBinding.edtSenha.getText().toString());
     }
 
     public void abrirCadastro(View view) {

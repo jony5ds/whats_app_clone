@@ -17,6 +17,7 @@ import com.example.whatsclone.activity.login.LoginActivity;
 import com.example.whatsclone.config.ConfiguracaoFirebase;
 import com.example.whatsclone.databinding.ActivityCadastroUsuarioBinding;
 import com.example.whatsclone.helper.Base64Custom;
+import com.example.whatsclone.helper.Preferencias;
 import com.example.whatsclone.obj.UsuarioObj;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -67,8 +68,11 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                     String novoUsuario = Base64Custom.codificarBase64(mUsuario.getEmail());
                     mUsuario.setId(novoUsuario);
                     mUsuario.salvar();
-                    irParaTelaConversas();
 
+                    Preferencias preferencias = new Preferencias(CadastroUsuarioActivity.this);
+                    preferencias.salvarDados(novoUsuario);
+
+                    irParaTelaConversas();
                 }
                 else {
                     String erro_exception;
@@ -99,5 +103,11 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
 
+    }
+
+    private void salvarUsuarioLogado() {
+        Preferencias preferencias = new Preferencias(this);
+        String identificadorUsuarioLogado = Base64Custom.codificarBase64(mUsuario.getEmail());
+        preferencias.salvarDados(identificadorUsuarioLogado);
     }
 }
