@@ -39,9 +39,9 @@ public class ContatoFragment extends Fragment {
         mContatos.add("Ewerton Ribeiro");
 
         //Monta listView e adapter
-        mAdapter = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,mContatos);
+        mAdapter = new ArrayAdapter(getActivity(),R.layout.lista_contato,mContatos);
 
-    //    mBinding.listaContatos.setAdapter(mAdapter);
+        mBinding.listaContatos.setAdapter(mAdapter);
 
         return mBinding.getRoot();
     }
