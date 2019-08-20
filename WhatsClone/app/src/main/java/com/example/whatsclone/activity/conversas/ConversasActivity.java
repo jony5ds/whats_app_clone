@@ -169,7 +169,6 @@ public class ConversasActivity extends AppCompatActivity {
         alertDialog.create();
         alertDialog.show();
 
-
     }
 
     private void deslogarUsuario() {
