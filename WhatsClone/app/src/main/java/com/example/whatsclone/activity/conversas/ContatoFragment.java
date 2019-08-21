@@ -26,7 +26,7 @@ public class ContatoFragment extends Fragment {
 
     private FragmentContatoBinding mBinding;
     private ArrayAdapter mAdapter;
-    private ArrayList<String> mContatos;
+    private ArrayList<ContatoObj> mContatos;
     private DatabaseReference mFirebase;
     private ValueEventListener mValueEventListenerContatos;
 
@@ -74,7 +74,7 @@ public class ContatoFragment extends Fragment {
                 for(DataSnapshot data : dataSnapshot.getChildren())
                 {
                     ContatoObj contato = data.getValue(ContatoObj.class);
-                    mContatos.add(contato.getNome());
+                    mContatos.add(contato);
                     mAdapter.notifyDataSetChanged();
                 }
             }
