@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#0b6156</color>
     <color name="textColorPrimary">#ffffff</color>
     <color name="ascent">#3d958a</color>
+    <color name="cinza">#CCCCCC</color>
 </resources>

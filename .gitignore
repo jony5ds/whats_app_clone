@@ -23,7 +23,8 @@ Thumbs.db
 
 # Android Studio
 *.iml
-.idea 
+.idea
+#.idea/workspace.xml - remove # and delete .idea if it better suit your needs.
 .gradle
 build/
 .navigation
@@ -33,5 +34,13 @@ output.json
 #NDK
 obj/
 .externalNativeBuild
-WhatsClone/app/.idea/workspace.xml
-WhatsClone/app/.idea/caches/gradle_models.ser
+
+*.iml
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/captures
+.externalNativeBuild

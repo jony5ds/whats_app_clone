@@ -10,6 +10,8 @@
    <ListView
        android:id="@+id/lista_contatos"
        android:layout_width="match_parent"
+       android:divider="@color/cinza"
+       android:dividerHeight="1dp"
        android:layout_height="wrap_content"/>
 
 </LinearLayout>
