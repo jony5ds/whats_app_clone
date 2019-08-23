@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import com.example.whatsclone.R;
+import com.example.whatsclone.activity.conversas.adapter.ContatoAdapter;
 import com.example.whatsclone.config.ConfiguracaoFirebase;
 import com.example.whatsclone.databinding.FragmentContatoBinding;
 import com.example.whatsclone.helper.Preferencias;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 public class ContatoFragment extends Fragment {
 
     private FragmentContatoBinding mBinding;
-    private ArrayAdapter mAdapter;
+    private ContatoAdapter mAdapter;
     private ArrayList<ContatoObj> mContatos;
     private DatabaseReference mFirebase;
     private ValueEventListener mValueEventListenerContatos;
@@ -56,7 +57,9 @@ public class ContatoFragment extends Fragment {
         //Monta listView e adapter
         Preferencias preferencias = new Preferencias(getActivity());
         String usuario = preferencias.getIdentificador();
-        mAdapter = new ArrayAdapter(getActivity(),R.layout.lista_contato,mContatos);
+       // mAdapter = new ArrayAdapter(getActivity(),R.layout.lista_contato,mContatos);
+        mAdapter = new ContatoAdapter(getActivity(),mContatos);
+
 
         mBinding.listaContatos.setAdapter(mAdapter);
 
