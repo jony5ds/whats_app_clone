@@ -1,6 +1,5 @@
-package com.example.whatsclone.activity.conversas;
+package com.example.whatsclone.activity.conversas.telaPrincipal;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -12,7 +11,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -31,7 +29,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-public class ConversasActivity extends AppCompatActivity {
+public class TelaPrincipalActivity extends AppCompatActivity {
 
     private ActivityConversasBinding mBinding;
     private FirebaseAuth mAuth;
@@ -64,7 +62,7 @@ public class ConversasActivity extends AppCompatActivity {
     }
 
     private void voltar() {
-        Intent intent = new Intent(ConversasActivity.this, LoginActivity.class);
+        Intent intent = new Intent(TelaPrincipalActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
     }
@@ -114,7 +112,7 @@ public class ConversasActivity extends AppCompatActivity {
 
                 //Verifica se o email foi digitado
                 if (emailDigitado.isEmpty()) {
-                    Toast.makeText(ConversasActivity.this, "Digite um email",
+                    Toast.makeText(TelaPrincipalActivity.this, "Digite um email",
                             Toast.LENGTH_SHORT).show();
                 } else {
                     //verifica se o usuário ja está cadastrado no app
@@ -129,7 +127,7 @@ public class ConversasActivity extends AppCompatActivity {
 
                                 UsuarioObj usuarioContato =  dataSnapshot.getValue(UsuarioObj.class);
 
-                                Preferencias preferencias = new Preferencias(ConversasActivity.this);
+                                Preferencias preferencias = new Preferencias(TelaPrincipalActivity.this);
                                 String identificadorUsuarioLogado = preferencias.getIdentificador();
                                 mFirebaseDao = ConfiguracaoFirebase.getFirebase();
                                 mFirebaseDao = mFirebaseDao.child("contatos")
@@ -143,7 +141,7 @@ public class ConversasActivity extends AppCompatActivity {
                                 mFirebaseDao.setValue(contato);
 
                             } else {
-                                Toast.makeText(ConversasActivity.this,
+                                Toast.makeText(TelaPrincipalActivity.this,
                                         "Usuário não cadastrado", Toast.LENGTH_SHORT)
                                         .show();
                             }

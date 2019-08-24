@@ -5,8 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.example.whatsclone.activity.conversas.ContatoFragment;
-import com.example.whatsclone.activity.conversas.ConversasFragment;
+import com.example.whatsclone.activity.conversas.telaPrincipal.ContatoFragment;
+import com.example.whatsclone.activity.conversas.telaPrincipal.ConversasFragment;
 
 public class Tab_adapter extends FragmentStatePagerAdapter {
 

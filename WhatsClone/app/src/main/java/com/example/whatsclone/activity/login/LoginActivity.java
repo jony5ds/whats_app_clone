@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.example.whatsclone.R;
 import com.example.whatsclone.activity.cadastro.CadastroUsuarioActivity;
-import com.example.whatsclone.activity.conversas.ConversasActivity;
+import com.example.whatsclone.activity.conversas.telaPrincipal.TelaPrincipalActivity;
 import com.example.whatsclone.config.ConfiguracaoFirebase;
 import com.example.whatsclone.helper.Base64Custom;
 import com.example.whatsclone.helper.Preferencias;
@@ -91,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void irParaTelaConversas() {
-        Intent intent = new Intent(LoginActivity.this, ConversasActivity.class);
+        Intent intent = new Intent(LoginActivity.this, TelaPrincipalActivity.class);
         startActivity(intent);
         finish();
     }

@@ -4,16 +4,12 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.whatsclone.R;
-import com.example.whatsclone.activity.conversas.ConversasActivity;
-import com.example.whatsclone.activity.login.LoginActivity;
+import com.example.whatsclone.activity.conversas.telaPrincipal.TelaPrincipalActivity;
 import com.example.whatsclone.config.ConfiguracaoFirebase;
 import com.example.whatsclone.databinding.ActivityCadastroUsuarioBinding;
 import com.example.whatsclone.helper.Base64Custom;
@@ -26,7 +22,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
-import com.google.firebase.auth.FirebaseUser;
 
 public class CadastroUsuarioActivity extends AppCompatActivity {
 
@@ -99,7 +94,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
 
     private void irParaTelaConversas()
     {
-        Intent intent = new Intent(this, ConversasActivity.class);
+        Intent intent = new Intent(this, TelaPrincipalActivity.class);
         startActivity(intent);
         finish();
 

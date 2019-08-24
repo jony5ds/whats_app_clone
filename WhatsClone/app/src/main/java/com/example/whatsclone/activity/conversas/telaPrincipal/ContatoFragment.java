@@ -1,5 +1,6 @@
-package com.example.whatsclone.activity.conversas;
+package com.example.whatsclone.activity.conversas.telaPrincipal;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,10 +8,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import com.example.whatsclone.R;
 import com.example.whatsclone.activity.conversas.adapter.ContatoAdapter;
+import com.example.whatsclone.activity.conversas.telaConversas.ConversaActivity;
 import com.example.whatsclone.config.ConfiguracaoFirebase;
 import com.example.whatsclone.databinding.FragmentContatoBinding;
 import com.example.whatsclone.helper.Preferencias;
@@ -88,6 +91,18 @@ public class ContatoFragment extends Fragment {
             }
         };
         mFirebase.addValueEventListener(mValueEventListenerContatos);
+
+        mBinding.listaContatos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), ConversaActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
+
 
         return mBinding.getRoot();
     }

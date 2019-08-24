@@ -1,4 +1,4 @@
-package com.example.whatsclone.activity.conversas;
+package com.example.whatsclone.activity.conversas.telaPrincipal;
 
 import android.content.Context;
 import android.net.Uri;

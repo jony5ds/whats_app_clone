@@ -7,14 +7,14 @@
 
         <variable
             name="conversa"
-            type="com.example.whatsclone.activity.conversas.ConversasActivity" />
+            type="com.example.whatsclone.activity.conversas.telaPrincipal.TelaPrincipalActivity" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".activity.conversas.ConversasActivity">
+        tools:context=".activity.conversas.telaPrincipal.TelaPrincipalActivity">
 
         <include
             android:id="@+id/content_toolbar"
