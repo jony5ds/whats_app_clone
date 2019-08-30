@@ -60,16 +60,16 @@ public class ContatoFragment extends Fragment {
         //Monta listView e adapter
         Preferencias preferencias = new Preferencias(getActivity());
         String usuario = preferencias.getIdentificador();
-       // mAdapter = new ArrayAdapter(getActivity(),R.layout.lista_contato,mContatos);
-        mAdapter = new ContatoAdapter(getActivity(),mContatos);
+        // mAdapter = new ArrayAdapter(getActivity(),R.layout.lista_contato,mContatos);
+        mAdapter = new ContatoAdapter(getActivity(), mContatos);
 
 
         mBinding.listaContatos.setAdapter(mAdapter);
 
         //recuperar dados do firebase
         mFirebase = ConfiguracaoFirebase.getFirebase()
-                    .child("contatos")
-                    .child(usuario);
+                .child("contatos")
+                .child(usuario);
         mValueEventListenerContatos = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -77,8 +77,7 @@ public class ContatoFragment extends Fragment {
                 // limpar contatos
                 mContatos.clear();
                 //listar contatos
-                for(DataSnapshot data : dataSnapshot.getChildren())
-                {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
                     ContatoObj contato = data.getValue(ContatoObj.class);
                     mContatos.add(contato);
                     mAdapter.notifyDataSetChanged();
@@ -96,13 +95,17 @@ public class ContatoFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), ConversaActivity.class);
+
+                //Recuperar dados a serem passados
+                ContatoObj contato = mContatos.get(position);
+
+                //enviando dados para conversa activity
+                intent.putExtra("nome", contato.getNome());
+                intent.putExtra("email", contato.getEmail());
+
                 startActivity(intent);
             }
         });
-
-
-
-
 
         return mBinding.getRoot();
     }
