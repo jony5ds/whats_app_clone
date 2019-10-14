@@ -25,36 +25,38 @@ import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
 public class CadastroUsuarioActivity extends AppCompatActivity {
 
-  private static ActivityCadastroUsuarioBinding mBinding;
-    UsuarioObj mUsuario;
-    FirebaseAuth autentica;
+    private static ActivityCadastroUsuarioBinding mBinding;
+    private UsuarioObj mUsuario;
+    private FirebaseAuth autentica;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       mBinding = DataBindingUtil.setContentView(this,R.layout.activity_cadastro_usuario);
-       mUsuario = new UsuarioObj();
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_cadastro_usuario);
+        mUsuario = new UsuarioObj();
 
-       mBinding.btnCadastrar.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               obterDados();
-               cadastrarUsuario();
-           }
-       });
+        mBinding.btnCadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                obterDados();
+                cadastrarUsuario();
+            }
+        });
 
     }
 
     private void obterDados() {
-       mUsuario.setNome(mBinding.edtCadastroNome.getText().toString());
-       mUsuario.setEmail(mBinding.edtCadastroEmail.getText().toString());
-       mUsuario.setSenha(mBinding.edtCadastroSenha.getText().toString());
+        mUsuario.setNome(mBinding.edtCadastroNome.getText().toString());
+        mUsuario.setEmail(mBinding.edtCadastroEmail.getText().toString());
+        mUsuario.setSenha(mBinding.edtCadastroSenha.getText().toString());
     }
 
     private void cadastrarUsuario() {
         autentica = ConfiguracaoFirebase.getAutenticacao();
         autentica.createUserWithEmailAndPassword(
-                mUsuario.getEmail(),mUsuario.getSenha()
+                mUsuario.getEmail(), mUsuario.getSenha()
         ).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -64,24 +66,23 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                     mUsuario.setId(novoUsuario);
                     mUsuario.salvar();
 
+
+
                     Preferencias preferencias = new Preferencias(CadastroUsuarioActivity.this);
-                    preferencias.salvarDados(novoUsuario);
+                    preferencias.salvarDados(novoUsuario,mUsuario.getNome());
 
                     irParaTelaConversas();
-                }
-                else {
+                } else {
                     String erro_exception;
                     try {
                         throw task.getException();
                     } catch (FirebaseAuthWeakPasswordException e) {
                         erro_exception = "Digite uma senha mais forte!";
-                    } catch (FirebaseAuthInvalidCredentialsException e ) {
+                    } catch (FirebaseAuthInvalidCredentialsException e) {
                         erro_exception = "Email digitado é inválido!";
-                    }catch (FirebaseAuthUserCollisionException e)
-                    {
+                    } catch (FirebaseAuthUserCollisionException e) {
                         erro_exception = "Usuário já cadastrado !";
-                    }
-                    catch (Exception e) {
+                    } catch (Exception e) {
                         erro_exception = "Erro ao efetuar o cadastro!";
                         e.printStackTrace();
                     }
@@ -92,8 +93,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
 
     }
 
-    private void irParaTelaConversas()
-    {
+    private void irParaTelaConversas() {
         Intent intent = new Intent(this, TelaPrincipalActivity.class);
         startActivity(intent);
         finish();
@@ -103,6 +103,6 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
     private void salvarUsuarioLogado() {
         Preferencias preferencias = new Preferencias(this);
         String identificadorUsuarioLogado = Base64Custom.codificarBase64(mUsuario.getEmail());
-        preferencias.salvarDados(identificadorUsuarioLogado);
+        preferencias.salvarDados(identificadorUsuarioLogado, mUsuario.getNome());
     }
 }

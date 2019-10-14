@@ -13,6 +13,7 @@ import com.example.whatsclone.databinding.TelaConversaBinding;
 import com.example.whatsclone.helper.Base64Custom;
 import com.example.whatsclone.helper.Preferencias;
 import com.example.whatsclone.obj.ContatoObj;
+import com.example.whatsclone.obj.ConversaObj;
 import com.example.whatsclone.obj.MensagemObj;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,7 +21,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.EventListener;
 
 public class ConversaActivity extends AppCompatActivity {
 
@@ -28,8 +28,9 @@ public class ConversaActivity extends AppCompatActivity {
     private ContatoObj mDestinatario;
     private DatabaseReference mReference;
     private String mRemetente;
-    private ArrayList<String> mMensagens;
-    private ArrayAdapter mAdapter;
+    private String mNomeRemetente;
+    private ArrayList<MensagemObj> mMensagens;
+    private ArrayAdapter<MensagemObj> mAdapter;
     private ValueEventListener eventListenerMensagem;
 
 
@@ -41,17 +42,19 @@ public class ConversaActivity extends AppCompatActivity {
 
         mDestinatario = obterDadosUsuario();
 
-
+        Preferencias preferencias = new Preferencias(this);
+        mRemetente = preferencias.getIdentificador();
+        mNomeRemetente = preferencias.getNomeUsuarioLogado();
 
         configurarToolbar();
 
         //montar Lista e Adapter
         mMensagens = new ArrayList<>();
-        mAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, mMensagens);
+
+        mAdapter = new MensagemAdapter(this, mMensagens);
         mBinding.listaConversa.setAdapter(mAdapter);
 
         //Populando a lista de mensagens
-
         mReference = ConfiguracaoFirebase.getFirebase()
                 .child("mensagens")
                 .child(mRemetente)
@@ -67,7 +70,7 @@ public class ConversaActivity extends AppCompatActivity {
 
                 for (DataSnapshot dados : dataSnapshot.getChildren()) {
                     MensagemObj mensagem = dados.getValue(MensagemObj.class);
-                    mMensagens.add(mensagem.getMensagem());
+                    mMensagens.add(mensagem);
                 }
                 mAdapter.notifyDataSetChanged();
             }
@@ -81,6 +84,25 @@ public class ConversaActivity extends AppCompatActivity {
 
         mReference.addValueEventListener(eventListenerMensagem);
 
+    }
+
+    private ConversaObj obterConversaDestinario(MensagemObj mensagem) {
+
+        ConversaObj conversaObj = new ConversaObj();
+        conversaObj.setIdUsuario(mDestinatario.getId());
+        conversaObj.setMensagem(mensagem.getMensagem());
+        conversaObj.setNome(mDestinatario.getNome());
+
+        return conversaObj;
+    }
+
+    private ConversaObj obterConversaRemetente(MensagemObj mensagem) {
+
+        ConversaObj conversaObj = new ConversaObj();
+        conversaObj.setIdUsuario(mRemetente);
+        conversaObj.setNome(mNomeRemetente);
+        conversaObj.setMensagem(mensagem.getMensagem());
+        return conversaObj;
     }
 
     private void configurarToolbar() {
@@ -101,8 +123,6 @@ public class ConversaActivity extends AppCompatActivity {
 
     private ContatoObj obterDadosUsuario() {
         ContatoObj contato = new ContatoObj();
-        Preferencias preferencias = new Preferencias(this);
-        mRemetente = preferencias.getIdentificador();
         Bundle extra = getIntent().getExtras();
         if (extra != null) {
             contato.setNome(extra.getString("nome"));
@@ -117,11 +137,21 @@ public class ConversaActivity extends AppCompatActivity {
         String textoDigitado = mBinding.mensagem.getText().toString();
         if (!textoDigitado.isEmpty()) {
             MensagemObj mensagemObj = new MensagemObj();
-            mensagemObj.setIdUsuario(mDestinatario.getId());
+            mensagemObj.setIdUsuario(mRemetente);
             mensagemObj.setMensagem(textoDigitado);
 
             salvarMensagem(mRemetente, mDestinatario.getId(), mensagemObj);
+            salvarMensagem(mDestinatario.getId(), mRemetente, mensagemObj);
             mBinding.mensagem.setText("");
+
+            ConversaObj conversaDestinatario = obterConversaDestinario(mensagemObj);
+
+            salvarConversa(mRemetente,mDestinatario.getId(),conversaDestinatario);
+
+            ConversaObj conversaRemetente = obterConversaRemetente(mensagemObj);
+
+            salvarConversa(mDestinatario.getId(),mRemetente,conversaRemetente);
+
 
         }
     }
@@ -142,5 +172,20 @@ public class ConversaActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         mReference.removeEventListener(eventListenerMensagem);
+    }
+
+    private boolean salvarConversa(String idRemetente,
+                                   String idDestinatario,
+                                   ConversaObj conversaObj) {
+        try {
+            mReference = ConfiguracaoFirebase.getFirebase().child("conversas");
+            mReference.child(idRemetente)
+                    .child(idDestinatario)
+                    .setValue(conversaObj);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

@@ -20,12 +20,20 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
 
     private static ActivityLoginBinding mBinding;
     private UsuarioObj mUsuario;
     private FirebaseAuth mAuth;
+    private DatabaseReference firebase;
+    private ValueEventListener valueEventListener;
+    private String identificadorUsuarioLogado;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,9 +83,27 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void salvarUsuarioLogado() {
-        Preferencias preferencias = new Preferencias(LoginActivity.this);
-        String identificadorUsuarioLogado = Base64Custom.codificarBase64(mUsuario.getEmail());
-        preferencias.salvarDados(identificadorUsuarioLogado);
+
+        identificadorUsuarioLogado = Base64Custom.codificarBase64(mUsuario.getEmail());
+
+        firebase = ConfiguracaoFirebase.getFirebase()
+                .child("contatos").child(identificadorUsuarioLogado);
+
+        valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                UsuarioObj usuarioRecuperado = dataSnapshot.getValue(UsuarioObj.class);
+                Preferencias preferencias = new Preferencias(LoginActivity.this);
+                preferencias.salvarDados(identificadorUsuarioLogado,usuarioRecuperado.getNome());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
+        firebase.addListenerForSingleValueEvent(valueEventListener);
+
     }
 
     private void obterUsuario() {
