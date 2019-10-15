@@ -1,6 +1,7 @@
 package com.example.whatsclone.activity.conversas.telaPrincipal;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,12 +10,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import com.example.whatsclone.R;
 import com.example.whatsclone.activity.conversas.adapter.ConversasAdaper;
+import com.example.whatsclone.activity.conversas.telaConversas.ConversaActivity;
 import com.example.whatsclone.config.ConfiguracaoFirebase;
 import com.example.whatsclone.databinding.FragmentConversasBinding;
+import com.example.whatsclone.helper.Base64Custom;
 import com.example.whatsclone.helper.Preferencias;
 import com.example.whatsclone.obj.ConversaObj;
 import com.google.firebase.database.DataSnapshot;
@@ -75,6 +79,14 @@ public class ConversasFragment extends Fragment {
 
             }
         };
+
+        mBinding.listaConversas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                irParaConversa(position);
+
+            }
+        });
         return mBinding.getRoot();
     }
 
@@ -91,7 +103,15 @@ public class ConversasFragment extends Fragment {
         mFirebase.removeEventListener(mValueEventListenerConversas);
     }
 
-
+    private void irParaConversa(int position)
+    {
+        Intent intent = new Intent(getActivity(), ConversaActivity.class);
+        ConversaObj conversa = mConversas.get(position);
+        intent.putExtra("nome",conversa.getNome() );
+        String email = Base64Custom.decodificarBase64(conversa.getIdUsuario());
+        intent.putExtra("email", email );
+        startActivity(intent);
+    }
 
 
 }
