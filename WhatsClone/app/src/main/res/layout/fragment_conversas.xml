@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    tools:context=".activity.conversas.telaPrincipal.ConversasFragment">
+<layout>
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tela em construção"
         android:gravity="center"
-        android:textSize="26dp"
-        android:textColor="@color/colorPrimary"/>
+        android:orientation="vertical">
 
-</LinearLayout>
+        <ListView
+            android:id="@+id/lista_conversas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/cinza"
+            android:dividerHeight="1dp" />
+
+
+    </LinearLayout>
+</layout>
